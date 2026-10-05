@@ -1,0 +1,110 @@
+[
+  {
+    "asin": "B08C7KG5LP",
+    "cat": "tech",
+    "badge": "Top Tendance 💡",
+    "title": "Sony WH1000XM4| Casque Bluetooth à réduction de bruit sans fil, 30 heures d'auto",
+    "tagline": "Éclairage asymétrique anti-reflet pour écran avec variateur d'intensité tactile.",
+    "price": 379.0,
+    "rating": 4.6,
+    "reviewsCount": 1200,
+    "image": "https://m.media-amazon.com/images/I/71A9daPY+DL._AC_SL1500_.jpg",
+    "curator": "L'alternative idéale à BenQ : elle éclaire parfaitement le bureau sans aucun éblouissement sur la dalle."
+  },
+  {
+    "asin": "B09HM94VDS",
+    "cat": "tech",
+    "badge": "Bestseller Pro 🖱️",
+    "title": "Logitech MX Master 3S Souris sans Fil avec défilement Ultra-Rapide, Ergo, 8K DPI",
+    "tagline": "Molette MagSpeed ultra-rapide et clics silencieux pour un confort de travail absolu.",
+    "price": 69.99,
+    "rating": 4.5,
+    "reviewsCount": 1200,
+    "image": "https://m.media-amazon.com/images/I/61+OT7FPABL._AC_SL1500_.jpg",
+    "curator": "La référence mondiale des créateurs et développeurs. Précise sur toutes les surfaces même le verre."
+  },
+  {
+    "asin": "B08T5QN2TR",
+    "cat": "tech",
+    "badge": "Bestseller GaN 🔌",
+    "title": "Anker GaN II PPS Chargeur USB C 715 (Nano II 65 W), Pliable Rapide et Compact po",
+    "tagline": "Recharge ultra-rapide pour MacBook, PC portable, iPhone et tablette dans un format de poche.",
+    "price": 19.99,
+    "rating": 4.8,
+    "reviewsCount": 1200,
+    "image": "https://m.media-amazon.com/images/I/61PRvw0FyDL._AC_SL1500_.jpg",
+    "curator": "Remplace les gros chargeurs encombrants. Chauffe peu et voyage partout avec vous."
+  },
+  {
+    "asin": "B0874M3KW4",
+    "cat": "tech",
+    "badge": "Essentiel Bureau 💻",
+    "title": "Anker Concentrateur USB-C,Adaptateur PowerExpand 8 en 1",
+    "tagline": "HDMI 4K, Power Delivery 100W, lecteur SD et 3 ports USB pour tout connecter en un seul câble.",
+    "price": 29.99,
+    "rating": 4.3,
+    "reviewsCount": 1200,
+    "image": "https://m.media-amazon.com/images/I/71S-NPBF-qL._AC_SL1500_.jpg",
+    "curator": "Le compagnon parfait pour brancher double écran et accessoires à son ordinateur portable."
+  },
+  {
+    "asin": "B076F3C4XP",
+    "cat": "cuisine",
+    "badge": "Bestseller Barista ⭐",
+    "title": "Bonsenkitchen Mousseur à Lait Electrique, Mini Fouet en Acier Inoxydable",
+    "tagline": "Mousse onctueuse et veloutée en 15 secondes pour vos cappuccinos et matcha lattes.",
+    "price": 10.99,
+    "rating": 4.2,
+    "reviewsCount": 1200,
+    "image": "https://m.media-amazon.com/images/I/41skA+hnOdL._AC_SL1500_.jpg",
+    "curator": "Le secret des cafés savoureux comme au coffee shop pour moins de 15 euros."
+  },
+  {
+    "asin": "B00004RFRU",
+    "cat": "cuisine",
+    "badge": "Classique Italien ☕",
+    "title": "Bialetti - Moka Express: La Cafetière Expresso Iconique, Le Vrai Café Italien, C",
+    "tagline": "L'incontournable cafetière italienne en aluminium pour un espresso riche et aromatique.",
+    "price": 29.99,
+    "rating": 4.6,
+    "reviewsCount": 1200,
+    "image": "https://m.media-amazon.com/images/I/616WtXLQ9jL._AC_SL1500_.jpg",
+    "curator": "L'icône intemporelle du café authentique depuis 1933. Durable à vie et sans aucune capsule plastique."
+  },
+  {
+    "asin": "B00006JSUA",
+    "cat": "cuisine",
+    "badge": "Indestructible 🍳",
+    "title": "Lodge Poêle en fonte naturelle avec poignée | Tous feux | 26 cm",
+    "tagline": "Cuisson parfaite des viandes, légumes et plats mijotés avec une rétention thermique incomparable.",
+    "price": 12.79,
+    "rating": 4.3,
+    "reviewsCount": 1200,
+    "image": "https://m.media-amazon.com/images/I/71iH2iNxTZL._AC_SL1500_.jpg",
+    "curator": "La poêle américaine légendaire. Garantie à vie, utilisable sur induction, au four ou sur le feu."
+  },
+  {
+    "asin": "B0001P151W",
+    "cat": "gift",
+    "badge": "Légende Suisse 🇨🇭",
+    "title": "Victorinox Couteau Suisse Huntsman, 15 Fonctions, Scie, Ciseaux, Rouge",
+    "tagline": "15 fonctions indispensables dont ciseaux et scie à bois pour le quotidien et les aventures.",
+    "price": 43.0,
+    "rating": 4.8,
+    "reviewsCount": 1200,
+    "image": "https://m.media-amazon.com/images/I/61MAkd3lMXL._AC_SL1500_.jpg",
+    "curator": "Fabriqué en Suisse avec une précision horlogère. Le cadeau intemporel et utile à vie."
+  },
+  {
+    "asin": "B0017IHRNM",
+    "cat": "gift",
+    "badge": "Zéro Déchet ❄️",
+    "title": "Thermos Stainless King Gourde Bleu Nuit 1,18 l",
+    "tagline": "Maintient vos boissons chaudes 24h ou glacées 24h sans aucune fuite.",
+    "price": 60.64,
+    "rating": 4.7,
+    "reviewsCount": 1200,
+    "image": "https://m.media-amazon.com/images/I/51-jPi53DAL._AC_SL1500_.jpg",
+    "curator": "La marque historique de l'isolation thermique. Une robustesse à toute épreuve."
+  }
+]

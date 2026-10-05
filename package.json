@@ -1,0 +1,13 @@
+{
+  "name": "curated-boutique",
+  "version": "1.0.0",
+  "description": "Boutique d'Affiliation Moderne avec 4 univers thématiques",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -l 3000",
+    "dev": "npx serve . -l 3000"
+  },
+  "keywords": ["affiliate", "amazon", "curation", "ecommerce"],
+  "author": "Bruno & Antigravity",
+  "license": "MIT"
+}
