@@ -3,7 +3,7 @@
 // Moteur Multilingue (FR, EN, DE, ES, IT) & Affiliation Internationale
 // ==========================================
 
-const STORAGE_KEY_PRODUCTS = "curated_boutique_v13_audit_verified";
+const STORAGE_KEY_PRODUCTS = "curated_boutique_v15_projector_monitor";
 const STORAGE_KEY_AMAZON_TAG = "curated_boutique_amazon_tag";
 const STORAGE_KEY_LANG = "curated_boutique_lang";
 const DEFAULT_AMAZON_TAG = "lestrouvai0c0-21"; // Votre ID Partenaire officiel Amazon

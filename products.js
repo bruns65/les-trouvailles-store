@@ -118,6 +118,29 @@ const INITIAL_PRODUCTS = [
       "Compatible Bluetooth, clé USB et carte mémoire microSD pour écouter vos MP3"
     ]
   },
+  {
+    id: "tech-arzopa-monitor",
+    category: "tech",
+    categoryName: "Tech & Télétravail",
+    title: "Écran Portable 16\" ARZOPA 2,5K QHD 2560x1600 IPS HDR (Z1RC)",
+    tagline: "Doublez votre espace de travail en déplacement : dalle IPS 16:10 haute fidélité pour Mac, PC portable, Switch et consoles.",
+    price: 129.19,
+    originalPrice: 149.99,
+    rating: 4.6,
+    reviewsCount: 286,
+    badge: "Promo -14% 🔥",
+    image: "https://m.media-amazon.com/images/I/71Kyb26DewL._AC_SL1500_.jpg",
+    amazonAsin: "B0FCS3C11M",
+    amazonUrl: "https://www.amazon.fr/dp/B0FCS3C11M",
+    curatorOpinion: "Le compagnon de productivité ultime pour les nomades digitaux et le télétravail. Ultra-léger, il se glisse dans le sac avec le PC portable et s'alimente directement en Plug & Play avec un seul câble USB-C sans nécessiter de prise secteur.",
+    highlights: [
+      "Résolution 2,5K QHD (2560 x 1600) en format 16:10 idéal pour la productivité",
+      "Dalle IPS anti-reflets Eye Care 100% sRGB aux couleurs éclatantes",
+      "Connexion ultra-simple avec un seul câble USB-C (vidéo et alimentation)",
+      "Pied pliable en aluminium intégré et ports USB-C + Mini-HDMI",
+      "Compatible Mac, PC, iPhone 15/16, iPad, Nintendo Switch, PS5 et Xbox"
+    ]
+  },
 
   // ==========================================
   // 2. CUISINE & VIE PRATIQUE
@@ -258,6 +281,30 @@ const INITIAL_PRODUCTS = [
       "Zéro câble sur la table, utilisable partout",
       "Revêtement anti-adhésif haute qualité",
       "Spatules en bois sur-mesure incluses"
+    ]
+  },
+  {
+    id: "gift-projector-alwtniet",
+    category: "gift",
+    categoryName: "Idées Cadeaux & Insolite",
+    title: "Mini Vidéoprojecteur Portable Alwtniet FHD 1080P Natif & Rotation 180°",
+    tagline: "Cinéma géant au plafond ou sur mur : autofocus automatique, WiFi 6, Bluetooth 5.4 et compatibilité 4K/8K.",
+    price: 119.89,
+    originalPrice: 139.99,
+    rating: 4.4,
+    reviewsCount: 244,
+    badge: "Fun & Cinéma 🍿",
+    coupon: "Coupon -10% immédiat à cocher sur Amazon",
+    image: "https://m.media-amazon.com/images/I/71WQ-oV45uL._AC_SL1500_.jpg",
+    amazonAsin: "B0G34CX52X",
+    amazonUrl: "https://www.amazon.fr/dp/B0G34CX52X",
+    curatorOpinion: "Le gadget le plus fun et convivial pour transformer votre chambre ou salon en salle de cinéma ! Grâce à son socle pivotant à 180°, vous pouvez projeter vos séries préférées directement au plafond tout en restant confortablement allongé dans votre lit. L'autofocus et le trapèze s'ajustent automatiquement en 3 secondes chrono.",
+    highlights: [
+      "Projection rotative à 180° pour viser le mur, un drap ou directement le plafond du lit",
+      "Autofocus automatique et correction trapézoïdale instantanée sans réglage manuel",
+      "Résolution native Full HD 1080P et compatibilité décodage 4K / 8K",
+      "Connectivité WiFi 6 ultra-fluide pour streamer sans latence et Bluetooth 5.4",
+      "Luminosité puissante 600 ANSI pour des projections lumineuses et contrastées"
     ]
   },
 
