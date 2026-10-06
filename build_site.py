@@ -57,6 +57,9 @@ html_template = f"""<!DOCTYPE html>
     }}
   </script>
 
+  <!-- Awin Convert-a-link Tracking Automatique (ID: 3116267) -->
+  <script src="https://www.dwin1.com/3116267.js" type="text/javascript" defer="defer"></script>
+
   <style>
     body {{
       background-color: #faf9f6;
@@ -83,7 +86,7 @@ html_template = f"""<!DOCTYPE html>
       <div class="flex items-center gap-4 text-stone-400">
         <button id="openTagModalBtn" class="hover:text-amber-400 transition-colors flex items-center gap-1.5">
           <i data-lucide="tag" class="w-3.5 h-3.5 text-amber-500"></i>
-          <span>Tag Partenaire : <strong id="currentTagDisplay" class="text-emerald-400">abcompare-21</strong></span>
+          <span>Affiliation : <span id="currentTagDisplay" class="text-emerald-400">Amazon: abcompare-21 • Awin: 3116267</span></span>
         </button>
         <button id="openAdminBtn" class="hover:text-white transition-colors flex items-center gap-1 bg-stone-800 hover:bg-stone-700 px-2.5 py-0.5 rounded text-[11px]">
           <i data-lucide="sliders" class="w-3 h-3 text-amber-400"></i>
@@ -432,35 +435,52 @@ html_template = f"""<!DOCTYPE html>
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-200">
       <div class="flex items-center justify-between pb-4 border-b border-stone-100">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+          <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
             <i data-lucide="tag" class="w-4 h-4"></i>
           </div>
-          <h3 class="font-bold text-stone-900 text-base">Votre ID Partenaire Amazon</h3>
+          <h3 class="font-bold text-stone-900 text-base">Configuration Affiliation Multi-Marchands</h3>
         </div>
         <button id="closeTagModalBtn" class="text-stone-400 hover:text-stone-600">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div class="mt-4 space-y-3">
+      <div class="mt-4 space-y-4">
         <p class="text-xs text-stone-600 leading-relaxed">
-          Votre compte Partenaire officiel est configuré : <strong class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-mono">abcompare-21</strong>.
-        </p>
-        <p class="text-xs text-stone-500">
-          ⚡ <strong>Tous les boutons d'achat du site</strong> intègrent immédiatement votre lien affilié pour vous créditer les commissions !
+          ⚡ <strong>Vos identifiants officiels</strong> sont automatiquement injectés sur chaque lien marchand pour vous créditer 100% de vos commissions d'affiliation.
         </p>
 
-        <div>
-          <label class="block text-xs font-semibold text-stone-700 mb-1">Votre Tracking ID Amazon :</label>
+        <!-- Amazon -->
+        <div class="p-3 bg-amber-50/60 rounded-xl border border-amber-200/80">
+          <label class="block text-xs font-bold text-amber-900 mb-1 flex items-center justify-between">
+            <span>Tracking ID Amazon :</span>
+            <span class="text-[10px] bg-amber-200/70 text-amber-800 px-1.5 py-0.5 rounded font-mono font-normal">Actif</span>
+          </label>
           <input 
             type="text" 
             id="tagInput" 
             value="abcompare-21"
-            class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono"
+            class="w-full px-3 py-2 text-xs border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500/20 bg-white font-mono"
           >
+          <span class="text-[10px] text-amber-700/80 mt-1 block">Crédite toutes les commandes Amazon.fr & Europe</span>
         </div>
 
-        <div class="pt-2 flex items-center justify-end gap-2">
+        <!-- Awin (Fnac, Cdiscount, Darty) -->
+        <div class="p-3 bg-blue-50/60 rounded-xl border border-blue-200/80">
+          <label class="block text-xs font-bold text-blue-900 mb-1 flex items-center justify-between">
+            <span>Publisher ID Awin (Fnac, Cdiscount...) :</span>
+            <span class="text-[10px] bg-blue-200/70 text-blue-800 px-1.5 py-0.5 rounded font-mono font-normal">Actif</span>
+          </label>
+          <input 
+            type="text" 
+            id="awinInput" 
+            value="3116267"
+            class="w-full px-3 py-2 text-xs border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-white font-mono"
+          >
+          <span class="text-[10px] text-blue-700/80 mt-1 block">Crédite les clics et ventes Fnac, Cdiscount & marchands Awin</span>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-2 border-t border-stone-100">
           <button id="cancelTagBtn" class="px-4 py-2 text-xs font-medium text-stone-600 hover:bg-stone-100 rounded-lg">Fermer</button>
           <button id="saveTagBtn" class="px-4 py-2 text-xs font-semibold bg-stone-900 text-white rounded-lg hover:bg-stone-800 flex items-center gap-1.5">
             <i data-lucide="check" class="w-3.5 h-3.5"></i>

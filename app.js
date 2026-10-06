@@ -5,8 +5,18 @@
 
 const STORAGE_KEY_PRODUCTS = "abcompare_v3_tag_abcompare21";
 const STORAGE_KEY_AMAZON_TAG = "abcompare_amazon_tag";
+const STORAGE_KEY_AWIN_ID = "abcompare_awin_id";
 const STORAGE_KEY_LANG = "curated_boutique_lang";
 const DEFAULT_AMAZON_TAG = "abcompare-21"; // Votre ID Partenaire officiel Amazon ABCompare
+const DEFAULT_AWIN_ID = "3116267";         // Votre ID Éditeur officiel Awin ABCompare
+
+// Identifiants marchands France sur le réseau Awin
+const AWIN_MERCHANT_IDS = {
+  fnac: "12665",       // Fnac France (MID Awin: 12665)
+  cdiscount: "16908",  // Cdiscount (MID Awin: 16908)
+  darty: "12666",      // Darty France (MID Awin: 12666)
+  boulanger: "14588"   // Boulanger (MID Awin: 14588)
+};
 
 // Domaines Amazon par langue
 const AMAZON_DOMAINS = {
@@ -272,6 +282,7 @@ let state = {
   searchQuery: "",
   sortBy: "featured",
   amazonTag: DEFAULT_AMAZON_TAG,
+  awinId: DEFAULT_AWIN_ID,
   lang: "fr"
 };
 
@@ -309,6 +320,15 @@ function loadData() {
     state.amazonTag = DEFAULT_AMAZON_TAG;
     localStorage.setItem(STORAGE_KEY_AMAZON_TAG, DEFAULT_AMAZON_TAG);
   }
+
+  const savedAwin = localStorage.getItem(STORAGE_KEY_AWIN_ID);
+  if (savedAwin) {
+    state.awinId = savedAwin;
+  } else {
+    state.awinId = DEFAULT_AWIN_ID;
+    localStorage.setItem(STORAGE_KEY_AWIN_ID, DEFAULT_AWIN_ID);
+  }
+
   updateTagDisplay();
 
   // Toujours synchroniser avec le catalogue officiel à jour
@@ -318,6 +338,14 @@ function loadData() {
 
 function saveProducts() {
   localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(state.products));
+}
+
+// Formatage des liens partenaires Awin (Fnac, Cdiscount, Darty...)
+function buildAwinAffiliateUrl(targetUrl, merchantKey) {
+  const awinId = state.awinId || DEFAULT_AWIN_ID;
+  const mid = AWIN_MERCHANT_IDS[merchantKey] || "";
+  if (!awinId || !mid) return targetUrl;
+  return `https://www.awin1.com/cread.php?awinmid=${mid}&awinaffid=${encodeURIComponent(awinId)}&ued=${encodeURIComponent(targetUrl)}`;
 }
 
 // 2. Formatage des liens Amazon avec le Tag affilié et le domaine du pays actif
@@ -546,7 +574,7 @@ function getProductMerchants(product) {
       colorBadge: "bg-blue-100 text-blue-900 border-blue-300",
       btnClass: "bg-blue-600 hover:bg-blue-700 text-white font-bold",
       price: Number((amazonPrice * 1.04).toFixed(2)),
-      url: `https://www.cdiscount.com/search/10/${cleanTitle}.html`,
+      url: buildAwinAffiliateUrl(`https://www.cdiscount.com/search/10/${cleanTitle}.html`, "cdiscount"),
       delivery: "Livraison Express France",
       stock: "Vendeur certifié",
       cta: "Voir sur Cdiscount"
@@ -558,7 +586,7 @@ function getProductMerchants(product) {
       colorBadge: "bg-yellow-100 text-yellow-900 border-yellow-300",
       btnClass: "bg-amber-700 hover:bg-amber-800 text-white font-bold",
       price: Number((amazonPrice * 1.08).toFixed(2)),
-      url: `https://www.fnac.com/SearchResult/ResultList.aspx?SCat=0&Search=${cleanTitle}`,
+      url: buildAwinAffiliateUrl(`https://www.fnac.com/SearchResult/ResultList.aspx?SCat=0&Search=${cleanTitle}`, "fnac"),
       delivery: "Retrait 1h en magasin ou livraison",
       stock: "Boutique officielle",
       cta: "Voir sur Fnac"
@@ -1027,27 +1055,41 @@ function setupEventListeners() {
     if (e.target.id === "productModal") closeProductModal();
   });
 
-  // Tag Modal
+  // Tag Modal (Amazon & Awin)
   const tagModal = document.getElementById("tagModal");
   document.getElementById("openTagModalBtn")?.addEventListener("click", () => {
-    document.getElementById("tagInput").value = state.amazonTag;
+    const tagInput = document.getElementById("tagInput");
+    const awinInput = document.getElementById("awinInput");
+    if (tagInput) tagInput.value = state.amazonTag;
+    if (awinInput) awinInput.value = state.awinId || DEFAULT_AWIN_ID;
     tagModal.classList.remove("hidden");
   });
   document.getElementById("closeTagModalBtn")?.addEventListener("click", () => tagModal.classList.add("hidden"));
   document.getElementById("cancelTagBtn")?.addEventListener("click", () => tagModal.classList.add("hidden"));
   document.getElementById("saveTagBtn")?.addEventListener("click", () => {
-    const val = document.getElementById("tagInput").value.trim();
-    if (val) {
-      state.amazonTag = val;
-      localStorage.setItem(STORAGE_KEY_AMAZON_TAG, val);
+    const valAmazon = document.getElementById("tagInput")?.value.trim();
+    const valAwin = document.getElementById("awinInput")?.value.trim();
+
+    if (valAmazon) {
+      state.amazonTag = valAmazon;
+      localStorage.setItem(STORAGE_KEY_AMAZON_TAG, valAmazon);
     } else {
       state.amazonTag = DEFAULT_AMAZON_TAG;
       localStorage.setItem(STORAGE_KEY_AMAZON_TAG, DEFAULT_AMAZON_TAG);
     }
+
+    if (valAwin) {
+      state.awinId = valAwin;
+      localStorage.setItem(STORAGE_KEY_AWIN_ID, valAwin);
+    } else {
+      state.awinId = DEFAULT_AWIN_ID;
+      localStorage.setItem(STORAGE_KEY_AWIN_ID, DEFAULT_AWIN_ID);
+    }
+
     updateTagDisplay();
     tagModal.classList.add("hidden");
     renderProducts();
-    alert("ID Partenaire enregistré : " + state.amazonTag);
+    alert("Identifiants Partenaires enregistrés !\n• Amazon : " + state.amazonTag + "\n• Awin : " + state.awinId);
   });
 
   // Admin Modal
@@ -1135,9 +1177,8 @@ function setupEventListeners() {
 function updateTagDisplay() {
   const display = document.getElementById("currentTagDisplay");
   if (!display) return;
-  display.textContent = state.amazonTag;
+  display.innerHTML = `Amazon: <span class="text-emerald-400 font-mono">${escapeHtml(state.amazonTag)}</span> • Awin: <span class="text-blue-400 font-mono">${escapeHtml(state.awinId || DEFAULT_AWIN_ID)}</span>`;
   display.classList.remove("text-stone-400");
-  display.classList.add("text-emerald-400");
 }
 
 function escapeHtml(text) {
