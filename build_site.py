@@ -21,6 +21,24 @@ html_template = f"""<!DOCTYPE html>
   <meta name="description" content="ABCompare compare en direct les meilleurs prix des pépites du web entre Amazon, Cdiscount, Fnac et AliExpress pour vous garantir l'offre la moins chère.">
   <link rel="icon" type="image/jpeg" href="{loupe_b64}">
 
+  <!-- Open Graph (WhatsApp, Facebook, Telegram, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://abcompare.netlify.app/">
+  <meta property="og:title" content="ABCompare – Comparateur A/B : trouvez le vrai meilleur prix 🏆">
+  <meta property="og:description" content="Amazon vs Cdiscount vs Fnac vs AliExpress – on compare tout en direct pour vous. Économisez jusqu'à -40% sur chaque gadget tendance !">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="ABCompare">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ABCompare – Comparateur A/B : trouvez le vrai meilleur prix 🏆">
+  <meta name="twitter:description" content="Amazon vs Cdiscount vs Fnac vs AliExpress – on compare tout en direct pour vous !">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=80">
+
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Plus Jakarta Sans -->
@@ -252,7 +270,16 @@ html_template = f"""<!DOCTYPE html>
         >
           <i data-lucide="layout-grid" class="w-4 h-4"></i>
           <span>Tout comparer</span>
-          <span class="ml-1 text-[11px] px-2 py-0.2 rounded-full bg-stone-700 text-stone-200" id="count-all">20</span>
+          <span class="ml-1 text-[11px] px-2 py-0.2 rounded-full bg-stone-700 text-stone-200" id="count-all">24</span>
+        </button>
+
+        <!-- Tab: 🔥 Tendances Virales -->
+        <button 
+          data-category="viral" 
+          class="category-tab px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100"
+        >
+          <i data-lucide="flame" class="w-4 h-4 text-rose-500"></i>
+          <span>🔥 Tendances Virales</span>
         </button>
 
         <!-- Tab 1: Tech & Télétravail -->

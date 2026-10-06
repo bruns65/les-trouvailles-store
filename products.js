@@ -464,5 +464,98 @@ const INITIAL_PRODUCTS = [
       "Alimentation USB universelle avec interrupteur",
       "Ambiance apaisante et chaleureuse"
     ]
+  },
+
+  // ==========================================
+  // 🔥 NOUVELLES PÉPITES VIRALES - Octobre 2026
+  // ==========================================
+  {
+    id: "tech-carplay-7-wireless",
+    category: "tech",
+    categoryName: "Tech & Télétravail",
+    title: "Écran CarPlay Android Auto 7\" Sans Fil Portable pour Voiture",
+    tagline: "Modernisez n'importe quelle vieille voiture en 2 minutes : Apple CarPlay & Android Auto sans fil avec GPS, YouTube et Spotify.",
+    price: 49.99,
+    originalPrice: 69.99,
+    rating: 4.5,
+    reviewsCount: 1842,
+    badge: "Viral TikTok 🚗",
+    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
+    amazonUrl: "https://www.amazon.fr/s?k=ecran+carplay+android+auto+7+pouces+sans+fil+voiture",
+    curatorOpinion: "Des millions de vues sur TikTok pour ce gadget qui transforme n'importe quelle voiture en voiture connectée en 2 minutes chrono. Pas besoin de changer d'autoradio : il se branche juste sur la prise allume-cigare ou USB et c'est prêt !",
+    highlights: [
+      "Apple CarPlay & Android Auto entièrement sans fil (WiFi + Bluetooth)",
+      "Écran tactile 7 pouces HD avec luminosité réglable",
+      "Installation en 2 minutes : aucune modification du véhicule",
+      "GPS intégré, YouTube, Spotify, appels mains libres",
+      "Compatible 99% des véhicules avec prise USB ou allume-cigare"
+    ]
+  },
+  {
+    id: "tech-air-blower-electric",
+    category: "tech",
+    categoryName: "Tech & Télétravail",
+    title: "Souffleur d'Air Électrique 100 000 RPM – Nettoyeur PC, Clavier & Voiture",
+    tagline: "Remplacez définitivement vos bombes d'air jetables : 100 000 RPM, silencieux, rechargeable USB-C et sans filtres à changer.",
+    price: 29.99,
+    originalPrice: 44.99,
+    rating: 4.6,
+    reviewsCount: 2340,
+    badge: "Indispensable 💨",
+    image: "https://images.unsplash.com/photo-1588702547919-26089e690ecc?auto=format&fit=crop&w=800&q=80",
+    amazonUrl: "https://www.amazon.fr/s?k=souffleur+air+electrique+100000+RPM+clavier+pc+rechargeable",
+    curatorOpinion: "Fini les bombes d'air à 10€ qui se vident en 3 secondes ! Ce souffleur électrique rechargeable envoie un flux d'air ultra-puissant à 100 000 tr/min pour nettoyer parfaitement votre clavier, PC, appareil photo et l'habitacle de votre voiture. Silencieux et rechargeable via USB-C.",
+    highlights: [
+      "Moteur brushless 100 000 RPM pour un débit d'air ultra-puissant",
+      "Rechargeable via USB-C – autonomie jusqu'à 30 minutes",
+      "Silencieux : moins de 65 dB en fonctionnement",
+      "Embouts interchangeables inclus (clavier, ports USB, objectifs)",
+      "Remplace les bombes d'air jetables et nocives pour l'environnement"
+    ]
+  },
+  {
+    id: "gift-mini-printer-thermal",
+    category: "gift",
+    categoryName: "Idées Cadeaux & Insolite",
+    title: "Mini Imprimante Thermique Bluetooth Sans Encre – Photo & Étiquettes de Poche",
+    tagline: "Le phénomène étudiant et bullet journal : imprimez vos photos, mémos et stickers n'importe où en quelques secondes, sans cartouche ni encre.",
+    price: 19.99,
+    originalPrice: 29.99,
+    rating: 4.5,
+    reviewsCount: 5670,
+    badge: "Coup de Cœur 🖨️",
+    image: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80",
+    amazonUrl: "https://www.amazon.fr/s?k=mini+imprimante+thermique+bluetooth+sans+encre+poche",
+    curatorOpinion: "Le cadeau parfait pour les étudiants, les créatifs et les adeptes de bullet journal. Connectée via Bluetooth à votre téléphone, elle imprime des photos, étiquettes ou mémos en quelques secondes sans aucune cartouche d'encre grâce à la technologie thermique. Elle tient dans une poche !",
+    highlights: [
+      "Impression thermique sans encre, sans cartouche, zéro consommable",
+      "Connexion Bluetooth à votre smartphone (iOS et Android)",
+      "Format ultra-compact – tient dans une poche ou un sac à dos",
+      "Papier autocollant compatible : photos, stickers, étiquettes, QR codes",
+      "Idéal pour bullet journal, voyages, organisation et souvenirs"
+    ]
+  },
+  {
+    id: "deco-ultrasonic-cleaner",
+    category: "deco",
+    categoryName: "Maison & Décoration",
+    title: "Nettoyeur à Ultrasons pour Lunettes, Bijoux, Montres & Dentiers",
+    tagline: "Le nettoyage satisfaisant viral qui cartonne sur TikTok : 42 000 Hz d'ultrasons éliminent 99% des saletés invisibles en 3 minutes.",
+    price: 24.99,
+    originalPrice: 35.99,
+    rating: 4.6,
+    reviewsCount: 3125,
+    badge: "Satisfaisant 🔊",
+    coupon: "Coupon -5€ à cocher sur Amazon",
+    image: "https://images.unsplash.com/photo-1559570278-eb8d71d06403?auto=format&fit=crop&w=800&q=80",
+    amazonUrl: "https://www.amazon.fr/s?k=nettoyeur+ultrasons+lunettes+bijoux+montres+600ml",
+    curatorOpinion: "Les vidéos de nettoyage à ultrasons font des millions de vues : on plonge les lunettes, et en 3 minutes elles ressortent parfaitement propres là où même le chiffon microfibre ne passait pas. Fonctionne aussi pour les bijoux, montres, dentiers et pièces mécaniques.",
+    highlights: [
+      "42 000 Hz d'ultrasons pour déloger saletés, huiles et bactéries invisibles",
+      "Nettoyage en 3 à 5 minutes sans produit chimique agressif",
+      "Cuve inox 600 ml compatible lunettes, bijoux, montres et dentiers",
+      "5 modes de nettoyage intensité et durée réglables",
+      "Chauffage intégré optionnel pour un nettoyage encore plus profond"
+    ]
   }
 ];

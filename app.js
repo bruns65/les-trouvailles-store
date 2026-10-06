@@ -41,10 +41,13 @@ const I18N = {
     primeBadge: "Comparatif A/B en direct",
     topNotice: "⚖️ ABCompare • Meilleurs prix vérifiés entre Amazon, Cdiscount, Fnac & AliExpress",
     tabAll: "Tout comparer",
+    tabViral: "🔥 Tendances Virales",
     tabTech: "Tech & Télétravail",
     tabDeco: "Maison & Décoration",
     tabGift: "Idées Cadeaux & Insolite",
     tabCuisine: "Cuisine & Pratique",
+    shareBtn: "Partager ce bon plan",
+    shareCopied: "✅ Lien copié !",
     priceLabel: "Prix :",
     priceAll: "Tous",
     priceUnder20: "< 20 €",
@@ -500,7 +503,14 @@ function renderCounters() {
 function getFilteredProducts() {
   return state.products
     .filter(product => {
-      if (state.activeCategory !== "all" && product.category !== state.activeCategory) {
+      // Filtre catégorie (y compris le filtre viral)
+      if (state.activeCategory === "viral") {
+        const badge = (product.badge || "").toLowerCase();
+        const tagline = (product.tagline || "").toLowerCase();
+        if (!badge.includes("viral") && !badge.includes("tendance") && !badge.includes("tiktok") && !tagline.includes("viral") && !tagline.includes("tiktok")) {
+          return false;
+        }
+      } else if (state.activeCategory !== "all" && product.category !== state.activeCategory) {
         return false;
       }
       
@@ -769,6 +779,16 @@ function renderProducts() {
             >
               <i data-lucide="scale" class="w-3 h-3"></i>
               <span>Tableau comparatif complet (4 offres)</span>
+            </button>
+
+            <!-- Bouton Partager ce bon plan -->
+            <button
+              type="button"
+              onclick="shareProduct('${product.id}', '${escapeHtml(product.title)}')"
+              class="w-full mt-1.5 py-1.5 text-[11px] text-stone-500 hover:text-emerald-700 bg-stone-50 hover:bg-emerald-50 border border-stone-200 hover:border-emerald-300 font-semibold rounded-lg transition-colors flex items-center justify-center gap-1"
+            >
+              <i data-lucide="share-2" class="w-3 h-3"></i>
+              <span>Partager ce bon plan</span>
             </button>
           </div>
 
@@ -1189,4 +1209,32 @@ function escapeHtml(text) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+// Partage d'un bon plan (Web Share API ou fallback copie presse-papiers)
+function shareProduct(productId, productTitle) {
+  const url = `https://abcompare.netlify.app/#${productId}`;
+  const text = `🏆 Bon plan ABCompare : "${productTitle}" — Comparé sur Amazon, Cdiscount, Fnac & AliExpress. Retrouve le meilleur prix ici :`;
+
+  if (navigator.share) {
+    // Web Share API (mobile natif : iOS Safari, Android Chrome)
+    navigator.share({
+      title: `ABCompare – ${productTitle}`,
+      text: text,
+      url: url
+    }).catch(() => {});
+  } else {
+    // Fallback : copie dans le presse-papiers
+    const fullText = `${text}\n${url}`;
+    navigator.clipboard.writeText(fullText).then(() => {
+      // Toast de confirmation
+      const toast = document.createElement("div");
+      toast.className = "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-emerald-700 text-white text-xs font-bold px-5 py-3 rounded-full shadow-xl flex items-center gap-2 animate-bounce";
+      toast.innerHTML = `<span>✅</span> <span>Lien copié ! Partagez-le sur WhatsApp, TikTok ou Instagram.</span>`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3500);
+    }).catch(() => {
+      alert("Copiez ce lien : " + url);
+    });
+  }
 }
