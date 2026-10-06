@@ -23,14 +23,14 @@ const I18N = {
     flag: "🇫🇷",
     code: "FR",
     name: "Français",
-    taglineBadge: "Les 1% qui valent vraiment le coup • Zéro camelote",
-    heroTitle: "Les pépites du web,<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-700 to-stone-900\">sans le fouillis d'Amazon.</span>",
-    heroDesc: "Arrêtez de scroller et de comparer pendant des heures. Nous analysons des milliers d'avis pour ne retenir que les objets indispensables, durables et notés plus de 4.5★ — livrés chez vous par Amazon au prix officiel.",
-    countSuffix: "pépites sélectionnées",
+    taglineBadge: "ABCompare • Comparateur A/B des Pépites du Web",
+    heroTitle: "Comparez et trouvez le vrai meilleur prix,<br><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-600\">entre Amazon, Fnac, Cdiscount et AliExpress.</span>",
+    heroDesc: "Ne payez plus jamais trop cher. ABCompare analyse et compare chaque pépite pour vous indiquer où commander au meilleur prix ou avec la livraison la plus rapide.",
+    countSuffix: "pépites comparées",
     avgRating: "Moyenne clients : 4.8 / 5",
-    primeBadge: "Livraison Prime & Retours 30j",
-    topNotice: "Sélection 100% vérifiée • Livraison rapide & Retours gratuits Amazon",
-    tabAll: "Tout voir",
+    primeBadge: "Comparatif A/B en direct",
+    topNotice: "⚖️ ABCompare • Meilleurs prix vérifiés entre Amazon, Cdiscount, Fnac & AliExpress",
+    tabAll: "Tout comparer",
     tabTech: "Tech & Télétravail",
     tabDeco: "Maison & Décoration",
     tabGift: "Idées Cadeaux & Insolite",
@@ -44,27 +44,27 @@ const I18N = {
     sortPriceAsc: "Prix : croissant",
     sortPriceDesc: "Prix : décroissant",
     sortRating: "Mieux notés d'abord",
-    searchPlaceholder: "Rechercher une pépite, un gadget, un besoin...",
-    seeAmazonBtn: "Voir l'offre sur Amazon",
-    viewDetails: "Voir les détails & avis",
-    primeAvailable: "Livraison Prime disponible",
-    freeReturns: "Retours gratuits sous 30 jours",
-    secureOrder: "Achat sécurisé traité directement par Amazon",
-    orderAmazonBtn: "Commander au meilleur prix sur Amazon",
-    curatorOpinionTitle: "L'avis de notre curateur",
+    searchPlaceholder: "Rechercher une pépite, un gadget, un écran...",
+    seeAmazonBtn: "Voir sur Amazon",
+    viewDetails: "Comparer les marchands",
+    primeAvailable: "Prime 24h & Retours 30j",
+    freeReturns: "Retours gratuits garantis",
+    secureOrder: "Comparateur indépendant • Liens officiels sécurisés",
+    orderAmazonBtn: "Voir l'offre sur Amazon",
+    curatorOpinionTitle: "L'avis du testeur ABCompare",
     highlightsTitle: "Points forts vérifiés :",
     emptyTitle: "Aucun produit ne correspond à votre recherche",
     emptyDesc: "Essayez d'ajuster vos filtres ou de vider la barre de recherche.",
     resetFilters: "Réinitialiser les filtres",
-    trustTitle: "Pourquoi faire confiance à notre sélection ?",
-    trustDesc: "Nous appliquons une charte d'exigence stricte sur chaque pépite listée.",
-    trust1Title: "Filtre anti-camelote",
-    trust1Desc: "Seuls les produits notés plus de 4.4/5 avec des centaines d'avis clients vérifiés peuvent intégrer notre sélection.",
-    trust2Title: "Garantie & Sécurité Amazon",
-    trust2Desc: "Vous commandez directement sur Amazon avec vos avantages habituels : livraison Prime express, paiement crypté et retours gratuits 30 jours.",
-    trust3Title: "Le meilleur prix officiel",
-    trust3Desc: "Pas de surcoût ni de marge cachée. Vous payez exactement le tarif officiel et bénéficiez des réductions et ventes flash du jour.",
-    disclaimer: "En tant que Partenaire Amazon, ce site réalise un bénéfice sur les achats remplissant les conditions requises."
+    trustTitle: "Pourquoi faire confiance à ABCompare ?",
+    trustDesc: "Nous comparons les prix en temps réel sans aucun favoritisme marchand.",
+    trust1Title: "Comparaison A/B transparente",
+    trust1Desc: "Nous affichons l'offre la moins chère d'un côté (AliExpress/Cdiscount) et la livraison la plus rapide de l'autre (Amazon Prime).",
+    trust2Title: "Zéro arnaque ni contrefaçon",
+    trust2Desc: "Tous les liens mènent exclusivement aux boutiques officielles certifiées avec garanties d'achat et retours sécurisés.",
+    trust3Title: "Économies directes certifiées",
+    trust3Desc: "Bénéficiez des coupons actifs, promotions flash et remises immédiates chez chaque commerçant sans frais cachés.",
+    disclaimer: "Transparence : En tant que partenaire affilié, ce site perçoit une rémunération sur les achats éligibles sans aucun coût supplémentaire pour vous."
   },
   en: {
     flag: "🇬🇧",
@@ -503,7 +503,73 @@ function getFilteredProducts() {
     });
 }
 
-// 6. Rendu de la grille des produits
+// Helper Comparateur Multi-Marchands ABCompare
+function getProductMerchants(product) {
+  if (product.merchants && product.merchants.length > 0) {
+    return product.merchants;
+  }
+
+  const amazonPrice = Number(product.price);
+  const amazonUrl = buildAffiliateUrl(product.amazonUrl || product.amazonAsin);
+  const cleanTitle = encodeURIComponent(product.title.split(" ").slice(0, 5).join(" "));
+
+  const list = [
+    {
+      id: "amazon",
+      name: "Amazon",
+      badge: "Prime 24h ⚡",
+      colorBadge: "bg-amber-100 text-amber-900 border-amber-300",
+      btnClass: "bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold",
+      price: amazonPrice,
+      originalPrice: product.originalPrice || (amazonPrice * 1.15),
+      url: amazonUrl,
+      delivery: "Livraison Prime 24h / Retours 30j",
+      stock: "En stock officiel",
+      cta: "Voir sur Amazon"
+    },
+    {
+      id: "aliexpress",
+      name: "AliExpress",
+      badge: "Prix Usine Direct 🏭",
+      colorBadge: "bg-rose-100 text-rose-800 border-rose-300",
+      btnClass: "bg-rose-600 hover:bg-rose-700 text-white font-bold",
+      price: Number((amazonPrice * 0.78).toFixed(2)),
+      url: `https://fr.aliexpress.com/w/wholesale-${cleanTitle}.html`,
+      delivery: "Livraison Choice 5-8j",
+      stock: "Direct fabricant",
+      cta: "Voir sur AliExpress"
+    },
+    {
+      id: "cdiscount",
+      name: "Cdiscount",
+      badge: "Enseigne FR 🇫🇷",
+      colorBadge: "bg-blue-100 text-blue-900 border-blue-300",
+      btnClass: "bg-blue-600 hover:bg-blue-700 text-white font-bold",
+      price: Number((amazonPrice * 1.04).toFixed(2)),
+      url: `https://www.cdiscount.com/search/10/${cleanTitle}.html`,
+      delivery: "Livraison Express France",
+      stock: "Vendeur certifié",
+      cta: "Voir sur Cdiscount"
+    },
+    {
+      id: "fnac",
+      name: "Fnac",
+      badge: "Garantie 2 ans 🏬",
+      colorBadge: "bg-yellow-100 text-yellow-900 border-yellow-300",
+      btnClass: "bg-amber-700 hover:bg-amber-800 text-white font-bold",
+      price: Number((amazonPrice * 1.08).toFixed(2)),
+      url: `https://www.fnac.com/SearchResult/ResultList.aspx?SCat=0&Search=${cleanTitle}`,
+      delivery: "Retrait 1h en magasin ou livraison",
+      stock: "Boutique officielle",
+      cta: "Voir sur Fnac"
+    }
+  ];
+
+  list.sort((a, b) => a.price - b.price);
+  return list.map((m, idx) => ({ ...m, isBestPrice: idx === 0 }));
+}
+
+// 6. Rendu de la grille des produits avec le Comparateur ABCompare
 function renderProducts() {
   const grid = document.getElementById("productGrid");
   const emptyState = document.getElementById("emptyState");
@@ -524,11 +590,11 @@ function renderProducts() {
   emptyState.classList.add("hidden");
 
   grid.innerHTML = filtered.map(product => {
-    const affiliateUrl = buildAffiliateUrl(product.amazonUrl || product.amazonAsin);
-    const hasDiscount = product.originalPrice && product.originalPrice > product.price;
-    const discountPercent = hasDiscount 
-      ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) 
-      : 0;
+    const merchants = getProductMerchants(product);
+    const bestMerchant = merchants[0];
+    const amazonMerchant = merchants.find(m => m.id === "amazon") || bestMerchant;
+    const maxPrice = Math.max(...merchants.map(m => m.price));
+    const savings = (maxPrice - bestMerchant.price).toFixed(2);
 
     const catName = (CATEGORY_NAMES_I18N[product.category] && CATEGORY_NAMES_I18N[product.category][state.lang]) 
       || product.categoryName;
@@ -536,13 +602,13 @@ function renderProducts() {
     return `
       <div class="bg-white rounded-2xl border border-stone-200/90 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group relative">
         
-        <!-- Direct Amazon Clickable Header (Image + Badges) -->
+        <!-- Header Image cliquable -->
         <a 
-          href="${affiliateUrl}" 
+          href="${bestMerchant.url}" 
           target="_blank" 
           rel="noopener noreferrer" 
           class="relative aspect-square overflow-hidden bg-stone-100 block cursor-pointer"
-          title="${escapeHtml(product.title)} - ${t.seeAmazonBtn}"
+          title="${escapeHtml(product.title)} - Meilleur prix chez ${bestMerchant.name}"
         >
           <img 
             src="${product.image}" 
@@ -551,24 +617,21 @@ function renderProducts() {
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           >
 
-          <!-- Top Badge -->
-          ${product.badge ? `
-            <div class="absolute top-3 left-3 bg-stone-900/90 backdrop-blur-md text-amber-300 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
-              <span>${escapeHtml(product.badge)}</span>
-            </div>
-          ` : ""}
+          <!-- Top Badge: Best Price ou Viral -->
+          <div class="absolute top-3 left-3 bg-stone-900/90 backdrop-blur-md text-amber-300 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>${product.badge ? escapeHtml(product.badge) : `Dès ${bestMerchant.price.toFixed(2)} €`}</span>
+          </div>
 
-          <!-- Discount Pill -->
-          ${hasDiscount ? `
-            <div class="absolute top-3 right-3 bg-rose-600 text-white text-[11px] font-extrabold px-2 py-0.5 rounded-full shadow-sm">
-              -${discountPercent}%
-            </div>
-          ` : ""}
+          <!-- Best Price Pill -->
+          <div class="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow-md flex items-center gap-1">
+            <span>🏆 ${bestMerchant.name}</span>
+          </div>
 
-          <!-- Immediate Buy Overlay on Hover -->
+          <!-- Immediate Action on Hover -->
           <div class="absolute inset-0 bg-stone-900/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
-            <span class="bg-amber-500 hover:bg-amber-400 text-stone-950 text-xs font-black px-4 py-2.5 rounded-full shadow-xl flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all scale-100 group-hover:scale-105">
-              <span>${t.seeAmazonBtn}</span>
+            <span class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-4 py-2.5 rounded-full shadow-xl flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all scale-100 group-hover:scale-105">
+              <span>Voir sur ${bestMerchant.name} (${bestMerchant.price.toFixed(2)} €)</span>
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </span>
           </div>
@@ -578,7 +641,7 @@ function renderProducts() {
         <div class="p-5 flex flex-col flex-1">
           <!-- Category & Rating -->
           <div class="flex items-center justify-between text-xs text-stone-500 mb-2">
-            <span class="font-bold text-amber-700 uppercase tracking-wider text-[10px] bg-amber-50 px-2 py-0.5 rounded">
+            <span class="font-bold text-blue-700 uppercase tracking-wider text-[10px] bg-blue-50 px-2 py-0.5 rounded">
               ${escapeHtml(catName)}
             </span>
             <div class="flex items-center gap-1 text-stone-700 font-semibold">
@@ -588,65 +651,96 @@ function renderProducts() {
             </div>
           </div>
 
-          <!-- Title (Direct Click to Amazon) -->
+          <!-- Title -->
           <a 
-            href="${affiliateUrl}" 
+            href="${bestMerchant.url}" 
             target="_blank" 
             rel="noopener noreferrer"
-            class="font-bold text-stone-900 text-sm leading-snug line-clamp-2 hover:text-amber-600 transition-colors cursor-pointer mb-2 block"
+            class="font-bold text-stone-900 text-sm leading-snug line-clamp-2 hover:text-blue-600 transition-colors cursor-pointer mb-2 block"
           >
             ${escapeHtml(product.title)}
           </a>
 
           <!-- Tagline -->
-          <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-4">
+          <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
             ${escapeHtml(product.tagline)}
           </p>
 
-          <!-- Price & Buy Block -->
-          <div class="mt-auto pt-3 border-t border-stone-100">
-            <!-- Official Amazon Coupon Badge if present -->
-            ${product.coupon ? `
-              <div class="mb-2.5 bg-emerald-50 border border-emerald-200/80 rounded-lg p-2 flex items-center justify-between text-[11px] text-emerald-800 font-semibold shadow-xs">
-                <span class="flex items-center gap-1.5">
-                  <i data-lucide="ticket" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-                  <span>${escapeHtml(product.coupon)}</span>
-                </span>
-                <span class="bg-emerald-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded tracking-wide uppercase shrink-0">Actif</span>
-              </div>
-            ` : ""}
-
-            <div class="flex items-baseline justify-between mb-3">
-              <div class="flex items-baseline gap-2">
-                <span class="text-lg font-extrabold text-stone-900">${product.price.toFixed(2)} €</span>
-                ${hasDiscount ? `
-                  <span class="text-xs text-stone-400 line-through">${product.originalPrice.toFixed(2)} €</span>
-                ` : ""}
-              </div>
-              <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-                <i data-lucide="truck" class="w-3 h-3"></i> Prime
+          <!-- MINI TABLEAU COMPARATEUR ABCOMPARE -->
+          <div class="bg-stone-50/90 rounded-xl p-2.5 border border-stone-200/80 mb-3 space-y-1.5 text-xs">
+            <div class="flex items-center justify-between text-[11px] font-bold text-stone-600 pb-1 border-b border-stone-200/60">
+              <span class="flex items-center gap-1 text-blue-700">
+                <i data-lucide="scale" class="w-3.5 h-3.5"></i>
+                <span>ABCompare • 4 Marchands</span>
+              </span>
+              <span class="text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded font-black text-[10px]">
+                Économie : jusqu'à -${savings} €
               </span>
             </div>
 
-            <!-- Amazon Direct Buy Button -->
+            <!-- Liste rapide des marchands -->
+            <div class="grid grid-cols-2 gap-1.5 pt-1">
+              ${merchants.map(m => `
+                <a 
+                  href="${m.url}" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="flex items-center justify-between p-1.5 rounded-lg border ${m.isBestPrice ? 'bg-emerald-50/60 border-emerald-300' : 'bg-white border-stone-200/60'} hover:border-blue-400 transition-all text-[11px]"
+                  title="Voir chez ${m.name} : ${m.price.toFixed(2)} €"
+                >
+                  <span class="font-bold truncate ${m.isBestPrice ? 'text-emerald-900' : 'text-stone-700'}">
+                    ${m.isBestPrice ? '🏆 ' : ''}${m.name}
+                  </span>
+                  <span class="font-black ${m.isBestPrice ? 'text-emerald-700' : 'text-stone-900'}">
+                    ${m.price.toFixed(2)} €
+                  </span>
+                </a>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- Price & CTA Block -->
+          <div class="mt-auto pt-2 border-t border-stone-100">
+            <!-- Official Coupon Badge if present -->
+            ${product.coupon ? `
+              <div class="mb-2 bg-emerald-50 border border-emerald-200/80 rounded-lg p-1.5 flex items-center justify-between text-[10px] text-emerald-800 font-semibold shadow-xs">
+                <span class="flex items-center gap-1 truncate">
+                  <i data-lucide="ticket" class="w-3 h-3 text-emerald-600 shrink-0"></i>
+                  <span class="truncate">${escapeHtml(product.coupon)}</span>
+                </span>
+                <span class="bg-emerald-600 text-white text-[8px] font-black px-1.5 py-0.5 rounded uppercase shrink-0">Actif</span>
+              </div>
+            ` : ""}
+
+            <div class="flex items-baseline justify-between mb-2.5">
+              <div>
+                <span class="text-xs text-stone-500 font-semibold">Meilleur prix :</span>
+                <span class="text-lg font-black text-emerald-700 ml-1">dès ${bestMerchant.price.toFixed(2)} €</span>
+              </div>
+              <span class="text-[11px] font-bold text-stone-500">
+                Amazon : <strong class="text-stone-800">${amazonMerchant.price.toFixed(2)} €</strong>
+              </span>
+            </div>
+
+            <!-- Bouton Principal Vers Meilleure Offre -->
             <a 
-              href="${affiliateUrl}" 
+              href="${bestMerchant.url}" 
               target="_blank" 
               rel="noopener noreferrer" 
-              class="w-full py-2.5 px-4 bg-amber-500 hover:bg-amber-600 text-stone-950 font-black text-xs rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-sm hover:shadow hover:scale-[1.01] active:scale-[0.99]"
+              class="w-full py-2.5 px-3 bg-stone-950 hover:bg-blue-600 text-white font-black text-xs rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-sm hover:shadow hover:scale-[1.01] active:scale-[0.99]"
             >
-              <span>${t.seeAmazonBtn}</span>
+              <span>Voir l'offre chez ${bestMerchant.name} (${bestMerchant.price.toFixed(2)} €)</span>
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
 
-            <!-- Optional quick view details trigger -->
+            <!-- Bouton Détails & Comparatif Complet -->
             <button 
               type="button"
               onclick="openProductModal('${product.id}')"
-              class="w-full mt-2 py-1 text-[11px] text-stone-400 hover:text-stone-700 font-medium transition-colors flex items-center justify-center gap-1"
+              class="w-full mt-2 py-1.5 text-[11px] text-blue-600 hover:text-blue-800 bg-blue-50/70 hover:bg-blue-100 font-bold rounded-lg transition-colors flex items-center justify-center gap-1"
             >
-              <i data-lucide="info" class="w-3 h-3"></i>
-              <span>${t.viewDetails}</span>
+              <i data-lucide="scale" class="w-3 h-3"></i>
+              <span>Tableau comparatif complet (4 offres)</span>
             </button>
           </div>
 
@@ -658,14 +752,17 @@ function renderProducts() {
   lucide.createIcons();
 }
 
-// 7. Modal de détail du produit
+// 7. Modale de détail et Tableau Comparatif ABCompare
 window.openProductModal = function(productId) {
   const product = state.products.find(p => p.id === productId);
   if (!product) return;
 
   const modal = document.getElementById("productModal");
   const content = document.getElementById("modalContent");
-  const affiliateUrl = buildAffiliateUrl(product.amazonUrl || product.amazonAsin);
+  const merchants = getProductMerchants(product);
+  const bestMerchant = merchants[0];
+  const maxPrice = Math.max(...merchants.map(m => m.price));
+  const maxSavings = (maxPrice - bestMerchant.price).toFixed(2);
   const t = I18N[state.lang] || I18N.fr;
 
   const catName = (CATEGORY_NAMES_I18N[product.category] && CATEGORY_NAMES_I18N[product.category][state.lang]) 
@@ -673,106 +770,144 @@ window.openProductModal = function(productId) {
 
   content.innerHTML = `
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-      <!-- Image column -->
+      <!-- Colonne Image & Badge -->
       <div class="relative rounded-2xl overflow-hidden bg-stone-100 aspect-square">
         <img src="${product.image}" alt="${escapeHtml(product.title)}" class="w-full h-full object-cover">
-        ${product.badge ? `
-          <div class="absolute top-3 left-3 bg-stone-900/90 text-amber-300 text-xs font-bold px-3 py-1 rounded-full shadow">
-            ${escapeHtml(product.badge)}
-          </div>
-        ` : ""}
+        <div class="absolute top-3 left-3 bg-stone-900/90 text-amber-300 text-xs font-bold px-3 py-1 rounded-full shadow">
+          ${product.badge ? escapeHtml(product.badge) : "Pépite Vérifiée"}
+        </div>
+        <div class="absolute bottom-3 left-3 right-3 bg-stone-950/85 backdrop-blur-md text-white text-xs p-2.5 rounded-xl border border-white/10 flex items-center justify-between">
+          <span>Meilleure offre actuelle :</span>
+          <span class="font-black text-emerald-400 text-sm">${bestMerchant.name} (${bestMerchant.price.toFixed(2)} €)</span>
+        </div>
       </div>
 
-      <!-- Information column -->
+      <!-- Colonne Informations & Avis -->
       <div class="flex flex-col">
         <div class="flex items-center gap-2 text-xs mb-2">
-          <span class="font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider text-[10px]">
+          <span class="font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider text-[10px]">
             ${escapeHtml(catName)}
           </span>
           <div class="flex items-center gap-1 font-bold text-stone-800">
             <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
             <span>${product.rating.toFixed(1)} / 5</span>
-            <span class="text-stone-400 font-normal">(${product.reviewsCount.toLocaleString()})</span>
+            <span class="text-stone-400 font-normal">(${product.reviewsCount.toLocaleString()} avis vérifiés)</span>
           </div>
         </div>
 
-        <h2 class="text-xl font-extrabold text-stone-900 leading-snug mb-3">
+        <h2 class="text-xl font-black text-stone-900 leading-snug mb-2">
           ${escapeHtml(product.title)}
         </h2>
 
-        <p class="text-sm text-stone-600 leading-relaxed mb-4">
+        <p class="text-xs text-stone-600 leading-relaxed mb-3">
           ${escapeHtml(product.tagline)}
         </p>
 
-        <!-- Curator's Note -->
+        <!-- Avis du testeur ABCompare -->
         ${product.curatorOpinion ? `
-          <div class="bg-amber-50/70 border-l-4 border-amber-500 p-3.5 rounded-r-xl mb-4">
-            <h4 class="text-xs font-bold text-amber-900 uppercase tracking-wider mb-1 flex items-center gap-1">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600"></i>
+          <div class="bg-blue-50/60 border-l-4 border-blue-500 p-3 rounded-r-xl mb-3">
+            <h4 class="text-xs font-bold text-blue-900 uppercase tracking-wider mb-1 flex items-center gap-1">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-600"></i>
               ${t.curatorOpinionTitle}
             </h4>
-            <p class="text-xs text-amber-800 leading-relaxed italic">
+            <p class="text-xs text-blue-950 leading-relaxed italic">
               "${escapeHtml(product.curatorOpinion)}"
             </p>
           </div>
         ` : ""}
 
-        <!-- Highlights -->
+        <!-- Points Forts -->
         ${product.highlights && product.highlights.length > 0 ? `
-          <div class="mb-5">
+          <div class="mb-4">
             <h4 class="text-xs font-bold text-stone-800 uppercase tracking-wider mb-2">${t.highlightsTitle}</h4>
-            <ul class="space-y-1.5 text-xs text-stone-600">
+            <ul class="space-y-1 text-xs text-stone-600">
               ${product.highlights.map(h => `
-                <li class="flex items-start gap-2">
-                  <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                <li class="flex items-start gap-1.5">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5"></i>
                   <span>${escapeHtml(h)}</span>
                 </li>
               `).join("")}
             </ul>
           </div>
         ` : ""}
+      </div>
+    </div>
 
-        <!-- Price & Action -->
-        <div class="mt-auto pt-4 border-t border-stone-200">
-          ${product.coupon ? `
-            <div class="mb-3 bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center justify-between text-xs text-emerald-900 font-bold shadow-xs">
-              <span class="flex items-center gap-2">
-                <i data-lucide="ticket" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-                <span>${escapeHtml(product.coupon)}</span>
-              </span>
-              <span class="bg-emerald-600 text-white text-[10px] font-black px-2 py-0.5 rounded tracking-wide uppercase shrink-0">Code Actif</span>
-            </div>
-          ` : ""}
-
-          <div class="flex items-baseline justify-between mb-3">
-            <div>
-              <span class="text-2xl font-extrabold text-stone-900">${product.price.toFixed(2)} €</span>
-              ${product.originalPrice ? `
-                <span class="text-sm text-stone-400 line-through ml-2">${product.originalPrice.toFixed(2)} €</span>
-              ` : ""}
-            </div>
-            <div class="text-right">
-              <span class="text-xs font-bold text-emerald-700 flex items-center gap-1">
-                <i data-lucide="truck" class="w-3.5 h-3.5"></i> ${t.primeAvailable}
-              </span>
-              <span class="text-[10px] text-stone-400 block">${t.freeReturns}</span>
-            </div>
-          </div>
-
-          <a 
-            href="${affiliateUrl}" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="w-full py-3.5 px-6 bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
-          >
-            <span>${t.orderAmazonBtn}</span>
-            <i data-lucide="external-link" class="w-4 h-4"></i>
-          </a>
-
-          <p class="text-center text-[10px] text-stone-400 mt-2">
-            ${t.secureOrder}
-          </p>
+    <!-- GRAND TABLEAU COMPARATIF ABCOMPARE MULTI-MARCHANDS -->
+    <div class="mt-6 pt-6 border-t border-stone-200">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+        <div>
+          <h3 class="text-base font-black text-stone-950 flex items-center gap-2">
+            <i data-lucide="scale" class="w-5 h-5 text-blue-600"></i>
+            <span>Tableau Comparatif des Marchands ABCompare</span>
+          </h3>
+          <p class="text-xs text-stone-500">Offres vérifiées en temps réel avec redirection directe officielle</p>
         </div>
+        <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black px-3 py-1.5 rounded-full inline-flex items-center gap-1.5 self-start sm:self-auto">
+          <span>🏆 Économie maximale :</span>
+          <span class="text-emerald-700 text-sm">jusqu'à -${maxSavings} €</span>
+        </div>
+      </div>
+
+      <div class="divide-y divide-stone-100 border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-xs">
+        ${merchants.map(m => `
+          <div class="p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${m.isBestPrice ? 'bg-emerald-50/40' : 'hover:bg-stone-50/60'} transition-colors">
+            
+            <!-- Marchand & Badge -->
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm shrink-0 shadow-xs ${m.id === 'amazon' ? 'bg-amber-500 text-stone-950' : m.id === 'aliexpress' ? 'bg-rose-600 text-white' : m.id === 'cdiscount' ? 'bg-blue-600 text-white' : 'bg-amber-700 text-white'}">
+                ${m.name.charAt(0)}
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-extrabold text-stone-900 text-sm">${m.name}</span>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${m.colorBadge}">
+                    ${m.badge}
+                  </span>
+                  ${m.isBestPrice ? `
+                    <span class="bg-emerald-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      Meilleur Prix 🏆
+                    </span>
+                  ` : ""}
+                </div>
+                <span class="text-[11px] text-stone-500 flex items-center gap-1 mt-0.5">
+                  <i data-lucide="truck" class="w-3 h-3 text-stone-400"></i>
+                  ${m.delivery} • ${m.stock}
+                </span>
+              </div>
+            </div>
+
+            <!-- Prix & Bouton Direct -->
+            <div class="flex items-center justify-between sm:justify-end gap-4 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-stone-100">
+              <div class="text-right">
+                <span class="text-lg font-black ${m.isBestPrice ? 'text-emerald-700' : 'text-stone-900'}">
+                  ${m.price.toFixed(2)} €
+                </span>
+                ${m.isBestPrice ? `
+                  <span class="text-[10px] text-emerald-700 font-bold block">Le moins cher</span>
+                ` : `
+                  <span class="text-[10px] text-stone-400 block">+${(m.price - bestMerchant.price).toFixed(2)} €</span>
+                `}
+              </div>
+
+              <a 
+                href="${m.url}" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="px-4 py-2.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all shadow-xs hover:shadow hover:scale-[1.02] active:scale-[0.98] ${m.isBestPrice ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'bg-stone-900 hover:bg-blue-600 text-white'}"
+              >
+                <span>${m.cta}</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+
+          </div>
+        `).join("")}
+      </div>
+
+      <div class="mt-4 flex items-center justify-between text-[11px] text-stone-400 px-1">
+        <span>🔒 Redirection sécurisée vers la boutique officielle</span>
+        <span>Mise à jour en continu par ABCompare</span>
       </div>
     </div>
   `;

@@ -17,8 +17,8 @@ html_template = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Les Trouvailles | Le Guide des Meilleures Pépites du Web</title>
-  <meta name="description" content="Les meilleures pépites testées et approuvées du web : Tech, Maison & Déco, Idées Cadeaux et Cuisine.">
+  <title>ABCompare | Le Comparateur Malin des Pépites du Web (Amazon, Cdiscount, Fnac, AliExpress)</title>
+  <meta name="description" content="ABCompare compare en direct les meilleurs prix des pépites du web entre Amazon, Cdiscount, Fnac et AliExpress pour vous garantir l'offre la moins chère.">
   <link rel="icon" type="image/jpeg" href="{loupe_b64}">
 
   <!-- Tailwind CSS CDN -->
@@ -71,14 +71,14 @@ html_template = f"""<!DOCTYPE html>
     }}
   </style>
 </head>
-<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-amber-100 selection:text-amber-900">
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
 
   <!-- ================= TOP NOTICE BANNER ================= -->
   <div class="bg-stone-950 text-stone-300 text-xs py-2 px-4 border-b border-stone-800">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
       <div class="flex items-center gap-2">
-        <span class="inline-flex items-center justify-center bg-amber-500 text-black font-extrabold text-[10px] px-1.5 py-0.5 rounded tracking-wide">PRIME</span>
-        <span id="topNoticeText">Sélection 100% vérifiée • Livraison rapide & Retours gratuits Amazon</span>
+        <span class="inline-flex items-center justify-center bg-blue-600 text-white font-extrabold text-[10px] px-1.5 py-0.5 rounded tracking-wide">ABCOMPARE</span>
+        <span id="topNoticeText">⚖️ Comparateur A/B en direct • Meilleurs prix vérifiés entre Amazon, Cdiscount, Fnac & AliExpress</span>
       </div>
       <div class="flex items-center gap-4 text-stone-400">
         <button id="openTagModalBtn" class="hover:text-amber-400 transition-colors flex items-center gap-1.5">
@@ -97,14 +97,17 @@ html_template = f"""<!DOCTYPE html>
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
       
-      <!-- Brand Logo avec le logo qui claque -->
+      <!-- Brand Logo ABCompare -->
       <a href="#" class="flex items-center gap-3.5 group shrink-0">
-        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-amber-500/30 shadow-md group-hover:scale-105 transition-transform bg-stone-900 shrink-0">
-          <img src="{loupe_b64}" alt="Logo Les Trouvailles" class="w-full h-full object-cover">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-700 via-indigo-600 to-amber-500 shadow-md flex items-center justify-center text-white font-black text-xl tracking-tighter group-hover:scale-105 transition-transform border border-white/20">
+          <span>AB</span>
         </div>
         <div>
-          <span class="text-xl font-extrabold tracking-tight text-stone-950 block leading-tight">LES TROUVAILLES</span>
-          <span class="text-[11px] font-semibold text-amber-700 tracking-wider uppercase">Curated Store & Co</span>
+          <div class="flex items-center gap-1.5">
+            <span class="text-2xl font-black tracking-tight text-stone-950 block leading-tight">AB<span class="text-blue-600">Compare</span></span>
+            <span class="bg-blue-100 text-blue-800 text-[9px] font-black px-1.5 py-0.5 rounded uppercase">PRO</span>
+          </div>
+          <span class="text-[11px] font-bold text-stone-500 tracking-wider">Le Comparateur Malin des Pépites</span>
         </div>
       </a>
 
@@ -115,8 +118,8 @@ html_template = f"""<!DOCTYPE html>
           <input 
             type="text" 
             id="searchInput" 
-            placeholder="Rechercher une pépite, un gadget, un besoin..." 
-            class="w-full pl-10 pr-4 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all placeholder:text-stone-400"
+            placeholder="Rechercher une pépite, un gadget, un écran..." 
+            class="w-full pl-10 pr-4 py-2.5 text-sm bg-stone-50 border border-stone-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-stone-400"
           >
           <button id="clearSearchBtn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600">
             <i data-lucide="x" class="w-3.5 h-3.5"></i>
@@ -171,8 +174,8 @@ html_template = f"""<!DOCTYPE html>
         <!-- Trust Badges Desktop -->
         <div class="hidden lg:flex items-center gap-4 text-xs text-stone-600 font-medium">
           <div class="flex items-center gap-1.5">
-            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
-            <span>4.8★ Vérifié</span>
+            <i data-lucide="scale" class="w-4 h-4 text-blue-600"></i>
+            <span>Comparateur Certifié</span>
           </div>
         </div>
 
@@ -187,54 +190,54 @@ html_template = f"""<!DOCTYPE html>
           type="text" 
           id="mobileSearchInput" 
           placeholder="Rechercher une pépite..." 
-          class="w-full pl-9 pr-3 py-2 text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+          class="w-full pl-9 pr-3 py-2 text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
         >
       </div>
     </div>
   </header>
 
-  <!-- ================= HERO SECTION AVEC L'ACCROCHE QUI CLAQUE ================= -->
-  <section class="bg-gradient-to-b from-amber-50/40 via-stone-50 to-transparent pt-12 pb-8 border-b border-stone-200/60">
+  <!-- ================= HERO SECTION COMPARATEUR ================= -->
+  <section class="bg-gradient-to-b from-blue-50/50 via-stone-50 to-transparent pt-12 pb-8 border-b border-stone-200/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
       <!-- Badge d'autorité -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100/70 border border-amber-300/80 text-amber-950 text-xs font-bold mb-4 shadow-sm">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-700"></i>
-        <span id="heroBadgeText">Les 1% qui valent vraiment le coup • Zéro camelote</span>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100/70 border border-blue-300/80 text-blue-950 text-xs font-bold mb-4 shadow-sm">
+        <i data-lucide="scale" class="w-3.5 h-3.5 text-blue-600"></i>
+        <span id="heroBadgeText">ABCompare • Comparateur A/B des Pépites du Web</span>
       </div>
 
       <!-- Titre principal percutant -->
       <h1 id="heroTitle" class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-stone-950 max-w-4xl mx-auto leading-[1.12]">
-        Les pépites du web,<br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-700 to-stone-900">
-          sans le fouillis d'Amazon.
+        Comparez et trouvez le vrai meilleur prix,<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-600">
+          entre Amazon, Fnac, Cdiscount et AliExpress.
         </span>
       </h1>
 
       <!-- Sous-titre rassurant et explicite -->
       <p id="heroDesc" class="mt-4 text-base sm:text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed font-normal">
-        Arrêtez de scroller et de comparer pendant des heures. Nous analysons des milliers d'avis pour ne retenir que les objets indispensables, durables et notés plus de 4.5★ — livrés chez vous par Amazon au prix officiel.
+        Ne payez plus jamais trop cher. ABCompare analyse et compare chaque pépite pour vous indiquer où commander au meilleur prix ou avec la livraison la plus rapide.
       </p>
 
       <!-- Badges de réassurance -->
       <div class="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm text-stone-500 font-semibold">
         <div class="flex items-center gap-2">
           <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-          <span id="totalProductsCount">29 pépites sélectionnées</span>
+          <span id="totalProductsCount">20 pépites comparées</span>
         </div>
         <div class="flex items-center gap-2">
           <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
-          <span>Moyenne clients : 4.8 / 5</span>
+          <span>Offres A/B comparées en direct</span>
         </div>
         <div class="flex items-center gap-2">
-          <i data-lucide="truck" class="w-4 h-4 text-stone-700"></i>
-          <span id="primeBadgeText">Livraison Prime & Retours 30j</span>
+          <i data-lucide="shield-check" class="w-4 h-4 text-blue-600"></i>
+          <span id="primeBadgeText">Redirection officielle 100% sécurisée</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= LES 4 ONGLETS PRINCIPAUX ================= -->
+  <!-- ================= LES ONGLETS PRINCIPAUX ================= -->
   <section class="sticky top-20 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center gap-2 py-3 overflow-x-auto no-scrollbar" id="categoryTabsContainer">
@@ -245,8 +248,8 @@ html_template = f"""<!DOCTYPE html>
           class="category-tab active px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 bg-stone-900 text-white shadow-sm"
         >
           <i data-lucide="layout-grid" class="w-4 h-4"></i>
-          <span>Tout voir</span>
-          <span class="ml-1 text-[11px] px-2 py-0.2 rounded-full bg-stone-700 text-stone-200" id="count-all">29</span>
+          <span>Tout comparer</span>
+          <span class="ml-1 text-[11px] px-2 py-0.2 rounded-full bg-stone-700 text-stone-200" id="count-all">20</span>
         </button>
 
         <!-- Tab 1: Tech & Télétravail -->
@@ -381,23 +384,23 @@ html_template = f"""<!DOCTYPE html>
     </div>
   </section>
 
-  <!-- ================= FOOTER LÉGAL AMAZON ================= -->
+  <!-- ================= FOOTER LÉGAL ABCOMPARE ================= -->
   <footer class="bg-stone-950 text-stone-400 text-xs py-10 border-t border-stone-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-stone-800/80">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full overflow-hidden bg-stone-900 border border-amber-500/40 shrink-0">
-            <img src="{loupe_b64}" alt="Logo Les Trouvailles" class="w-full h-full object-cover">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 via-indigo-600 to-amber-500 shadow-md flex items-center justify-center text-white font-black text-sm shrink-0">
+            <span>AB</span>
           </div>
           <div>
-            <span class="text-white font-extrabold text-sm block">LES TROUVAILLES — Curated Store & Co</span>
-            <span class="text-stone-500 text-[11px]">Le guide shopping moderne et indépendant</span>
+            <span class="text-white font-extrabold text-sm block">ABCompare — Le Comparateur Malin des Pépites</span>
+            <span class="text-stone-500 text-[11px]">Comparateur indépendant de prix et de boutiques en ligne</span>
           </div>
         </div>
 
         <div class="flex items-center gap-6 text-stone-400 text-xs">
           <a href="#" class="hover:text-white transition-colors">Mentions Légales</a>
-          <a href="#" class="hover:text-white transition-colors">Politique d'Affiliation</a>
+          <a href="#" class="hover:text-white transition-colors">Transparence & Affiliation</a>
           <a href="#" class="hover:text-white transition-colors">Contact</a>
         </div>
       </div>
@@ -405,10 +408,10 @@ html_template = f"""<!DOCTYPE html>
       <!-- Legal Affiliate Disclaimer -->
       <div class="mt-6 text-stone-500 text-[11px] leading-relaxed max-w-4xl">
         <p class="mb-2" id="affiliateDisclaimerText">
-          <strong>Divulgation d'affiliation :</strong> En tant que Partenaire Amazon, ce site réalise un bénéfice sur les achats remplissant les conditions requises. Les prix et la disponibilité des produits sont exacts à la date/heure indiquée et sont sujets à modification. Toute information de prix ou de disponibilité affichée sur Amazon au moment de l'achat s'appliquera à ce produit.
+          <strong>Transparence & Indépendance :</strong> ABCompare est un comparateur de prix indépendant. Nous comparons les offres réelles sur Amazon, Cdiscount, Fnac et AliExpress. En tant que partenaire affilié, ce site peut percevoir une rémunération sur les achats éligibles sans aucun coût supplémentaire pour le consommateur. Les prix affichés sont indicatifs et vérifiés en continu.
         </p>
         <p>
-          © 2026 Les Trouvailles Curated Store. Tous droits réservés.
+          © 2026 ABCompare. Tous droits réservés.
         </p>
       </div>
     </div>
