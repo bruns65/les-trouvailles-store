@@ -3,7 +3,7 @@
 // Moteur Multilingue (FR, EN, DE, ES, IT) & Affiliation Internationale
 // ==========================================
 
-const STORAGE_KEY_PRODUCTS = "curated_boutique_v15_projector_monitor";
+const STORAGE_KEY_PRODUCTS = "curated_boutique_v16_tiktok_trends";
 const STORAGE_KEY_AMAZON_TAG = "curated_boutique_amazon_tag";
 const STORAGE_KEY_LANG = "curated_boutique_lang";
 const DEFAULT_AMAZON_TAG = "lestrouvai0c0-21"; // Votre ID Partenaire officiel Amazon
@@ -311,29 +311,8 @@ function loadData() {
   }
   updateTagDisplay();
 
-  const savedProducts = localStorage.getItem(STORAGE_KEY_PRODUCTS);
-  if (savedProducts) {
-    try {
-      const parsed = JSON.parse(savedProducts);
-      // Synchronisation automatique des photos exactes
-      const freshMap = new Map(INITIAL_PRODUCTS.map(p => [p.id, p]));
-      state.products = parsed.map(p => {
-        const fresh = freshMap.get(p.id);
-        if (fresh) {
-          return { ...p, image: fresh.image, title: fresh.title, tagline: fresh.tagline, curatorOpinion: fresh.curatorOpinion };
-        }
-        return p;
-      });
-      const existingIds = new Set(state.products.map(p => p.id));
-      const newItems = INITIAL_PRODUCTS.filter(p => !existingIds.has(p.id));
-      state.products = [...newItems, ...state.products];
-    } catch (e) {
-      console.error("Erreur de lecture du catalogue local, utilisation du catalogue par défaut", e);
-      state.products = [...INITIAL_PRODUCTS];
-    }
-  } else {
-    state.products = [...INITIAL_PRODUCTS];
-  }
+  // Toujours synchroniser avec le catalogue officiel à jour
+  state.products = [...INITIAL_PRODUCTS];
   saveProducts();
 }
 
