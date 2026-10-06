@@ -83,7 +83,7 @@ html_template = f"""<!DOCTYPE html>
       <div class="flex items-center gap-4 text-stone-400">
         <button id="openTagModalBtn" class="hover:text-amber-400 transition-colors flex items-center gap-1.5">
           <i data-lucide="tag" class="w-3.5 h-3.5 text-amber-500"></i>
-          <span>Tag Partenaire : <strong id="currentTagDisplay" class="text-emerald-400">lestrouvai0c0-21</strong></span>
+          <span>Tag Partenaire : <strong id="currentTagDisplay" class="text-emerald-400">abcompare-21</strong></span>
         </button>
         <button id="openAdminBtn" class="hover:text-white transition-colors flex items-center gap-1 bg-stone-800 hover:bg-stone-700 px-2.5 py-0.5 rounded text-[11px]">
           <i data-lucide="sliders" class="w-3 h-3 text-amber-400"></i>
@@ -444,7 +444,7 @@ html_template = f"""<!DOCTYPE html>
 
       <div class="mt-4 space-y-3">
         <p class="text-xs text-stone-600 leading-relaxed">
-          Votre compte Partenaire officiel est configuré : <strong class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-mono">lestrouvai0c0-21</strong>.
+          Votre compte Partenaire officiel est configuré : <strong class="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-mono">abcompare-21</strong>.
         </p>
         <p class="text-xs text-stone-500">
           ⚡ <strong>Tous les boutons d'achat du site</strong> intègrent immédiatement votre lien affilié pour vous créditer les commissions !
@@ -455,8 +455,8 @@ html_template = f"""<!DOCTYPE html>
           <input 
             type="text" 
             id="tagInput" 
-            value="lestrouvai0c0-21"
-            class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 font-mono"
+            value="abcompare-21"
+            class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono"
           >
         </div>
 

@@ -3,10 +3,10 @@
 // Moteur Multilingue (FR, EN, DE, ES, IT) & Affiliation Internationale
 // ==========================================
 
-const STORAGE_KEY_PRODUCTS = "curated_boutique_v16_tiktok_trends";
-const STORAGE_KEY_AMAZON_TAG = "curated_boutique_amazon_tag";
+const STORAGE_KEY_PRODUCTS = "abcompare_v3_tag_abcompare21";
+const STORAGE_KEY_AMAZON_TAG = "abcompare_amazon_tag";
 const STORAGE_KEY_LANG = "curated_boutique_lang";
-const DEFAULT_AMAZON_TAG = "lestrouvai0c0-21"; // Votre ID Partenaire officiel Amazon
+const DEFAULT_AMAZON_TAG = "abcompare-21"; // Votre ID Partenaire officiel Amazon ABCompare
 
 // Domaines Amazon par langue
 const AMAZON_DOMAINS = {
